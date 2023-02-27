@@ -4,9 +4,18 @@ module UnscopedAssociations
   def self.included(base)
     base.extend ClassMethods
     class << base
-      alias_method_chain :belongs_to, :unscoped
-      alias_method_chain :has_many, :unscoped
-      alias_method_chain :has_one, :unscoped
+      # alias_method_chain :belongs_to, :unscoped
+      # alias_method_chain :has_many, :unscoped
+      # alias_method_chain :has_one, :unscoped
+
+      alias_method :belongs_to_without_unscoped, :belongs_to
+      alias_method :belongs_to, :belongs_to_with_unscoped
+
+      alias_method :has_many_without_unscoped, :has_many
+      alias_method :has_many, :has_many_with_unscoped
+
+      alias_method :has_one_without_unscoped, :has_one
+      alias_method :has_one, :has_one_with_unscoped
     end
   end
 
